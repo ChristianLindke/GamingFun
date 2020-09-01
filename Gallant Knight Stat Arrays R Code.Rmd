@@ -1,0 +1,149 @@
+---
+title: "For Coin and Blood Arrays"
+author: "Christian Lindke"
+date: "8/30/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(formattable)
+
+```
+
+```{r StatArrays, echo=FALSE}
+
+## For Coin and Blood Character Design
+z = 20
+
+for (i in 1:z) {
+  n=5
+  array1 <- sample(seq(1,6), n, replace = T)
+  array1 <- sort(array1, decreasing = TRUE)
+  Die1 <- array1[1]
+  Die2 <- array1[2]
+  Die3 <- array1[3]
+  Die4 <- array1[4]
+  Die5 <- array1[5]
+  Die1a <- array1[1]
+  Die2a <- array1[4]
+  Die3a <- array1[3]
+  Die4a <- array1[2]
+  Die5a <- array1[5]
+  Stat1 <- 12 + Die1
+  Stat2 <- 11 - Die1 + Die2
+  Stat3 <- 11 - Die2 + Die3
+  Stat4 <- 10 - Die3 + Die4
+  Stat5 <- 10 - Die4 + Die5
+  Stat6 <- 10 - Die5
+  Stat1a <- 12 + Die1a
+  Stat2a <- 11 - Die1a + Die2a
+  Stat3a <- 11 - Die2a + Die3a
+  Stat4a <- 10 - Die3a + Die4a
+  Stat5a <- 10 - Die4a + Die5a
+  Stat6a <- 10 - Die5a
+  StatArray <- c(Stat1, Stat2, Stat3, Stat4, Stat5, Stat6)
+  StatArray2 <- c(Stat1a, Stat2a, Stat3a, Stat4a, Stat5a, Stat6a)
+
+  df <- data.frame("Statistic" = c("Stat1", "Stat2", "Stat3", "Stat4", "Stat5", "Stat6"), "Value" = StatArray)
+  df2 <- data.frame("Statistic" = c("Stat1", "Stat2", "Stat3", "Stat4", "Stat5", "Stat6"), "Value" = StatArray2)
+  
+  print(array1)
+  print(df)
+  print(df2)
+}
+
+```
+
+
+```{r SingleChar,}
+
+# In For Coin and Blood You Roll 5 Dice and Add them in a Sequence to Selected Values
+
+## Roll the dice
+
+
+n=5
+array2 <- sample(seq(1,6), n, replace = T)
+
+# Sort the Dice from Highest to Lowest
+
+array2 <- sort(array2, decreasing = TRUE)
+
+print(array2)
+
+# Using Dice in Decending Order
+
+# FIrst Assign Each Die from Highest to Lowest
+Die1b <- array2[1]
+Die2b <- array2[2]
+Die3b <- array2[3]
+Die4b <- array2[4]
+Die5b <- array2[5]
+
+# Now Add Those Respective Dice to the Stats in Order from Highest Die to Lowest Die
+
+Stat1b <- 12 + Die1b
+Stat2b <- 11 - Die1b + Die2b
+Stat3b <- 11 - Die2 + Die3b
+Stat4b <- 10 - Die3b + Die4b
+Stat5b <- 10 - Die4b + Die5b
+Stat6b <- 10 - Die5b
+
+StatArray3 <- c(Stat1b, Stat2b, Stat3b, Stat4b, Stat5b, Stat6b)
+df3 <- data.frame("Statistic" = c("Stat1", "Stat2", "Stat3", "Stat4", "Stat5", "Stat6"), "Value" = StatArray3)
+
+print(df3)
+
+# This Gives us a Highly Focused Character with 1 Very High Stat and the Rest of the Stats Average
+# We Can Instead Generate a Character with a Very High Primary Stat and More Mixed Array
+# We Still Add Highest Value to Our Primary Stat and Lowest Value to the Last Stat, but We then Take Second Lowest Value as Die 2 and the Second Highest Die as Die 4.
+
+Die1c <- array2[1]
+Die2c <- array2[4]
+Die3c <- array2[3]
+Die4c <- array2[2]
+Die5c <- array2[5]
+
+Stat1c <- 12 + Die1c
+Stat2c <- 11 - Die1c + Die2c
+Stat3c <- 11 - Die2c + Die3c
+Stat4c <- 10 - Die3c + Die4c
+Stat5c <- 10 - Die4c + Die5c
+Stat6c <- 10 - Die5c
+
+StatArray4 <- c(Stat1c, Stat2c, Stat3c, Stat4c, Stat5c, Stat6c)
+
+
+df4 <- data.frame("Statistic" = c("Stat1", "Stat2", "Stat3", "Stat4", "Stat5", "Stat6"), "Value" = StatArray4)
+  
+ 
+
+print(df4)
+
+## Lastly, We Can Play Around Even More by Putting the Third Lowest Roll (the Middle Roll) in the Primary Stat 
+
+Die1d <- array2[3]
+Die2d <- array2[4]
+Die3d <- array2[1]
+Die4d <- array2[2]
+Die5d <- array2[5]
+
+Stat1d <- 12 + Die1d
+Stat2d <- 11 - Die1d + Die2d
+Stat3d <- 11 - Die2d + Die3d
+Stat4d <- 10 - Die3d + Die4d
+Stat5d <- 10 - Die4d + Die5d
+Stat6d <- 10 - Die5d
+
+StatArray5 <- c(Stat1d, Stat2d, Stat3d, Stat4d, Stat5d, Stat6d)
+
+
+df5 <- data.frame("Statistic" = c("Stat1", "Stat2", "Stat3", "Stat4", "Stat5", "Stat6"), "Value" = StatArray5)
+
+print(df5)
+
+
+```
+
