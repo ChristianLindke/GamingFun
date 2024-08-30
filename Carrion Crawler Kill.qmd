@@ -1,0 +1,51 @@
+---
+title: "Killing Carrion Crawlers"
+author: "Christian Lindke"
+format: html
+editor: visual
+---
+
+## 
+
+Subtract the "to Hit" roll from 20 to get the number of successful outcomes: $20 - 12 = 8$
+
+Multiply the number of successful outcomes by .05: $8 * .05 = .40$
+
+Convert to percentage: $40\%$
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+
+d8 <- seq(1:8)
+d20 <- seq(1:20)
+
+DamageDie <-sample(d8, n, replace = TRUE) 
+ToHitDie <- sample(d20, n, replace = TRUE)
+
+Kill.Crawler.Rolls <- data.frame(DamageDie, ToHitDie)
+
+Kill.Crawler.Rolls <-  Kill.Crawler.Rolls |> 
+  mutate(Crawler.AC = 12) |> 
+  mutate(Hit.Crawler = if_else(ToHitDie >= Crawler.AC, 1, 0)) |> 
+  mutate(Damage.Done = DamageDie*Hit.Crawler) |> 
+  mutate(Did.Hit = if_else(Hit.Crawler == 1, "Yes", "No"))
+
+summary(Kill.Crawler.Rolls$Damage.Done)
+
+ThiefDamageDie <-sample(d6, n, replace = TRUE) 
+ThiefToHitDie <- sample(d20, n, replace = TRUE)
+
+Thief.Kill.Crawler.Rolls <- data.frame(ThiefDamageDie, ThiefToHitDie)
+
+Thief.Kill.Crawler.Rolls <-  Thief.Kill.Crawler.Rolls |> 
+  mutate(Crawler.AC = 12) |> 
+  mutate(Hit.Crawler = if_else(ThiefToHitDie >= Crawler.AC, 1, 0)) |> 
+  mutate(Damage.Done = ThiefDamageDie*Hit.Crawler) |> 
+  mutate(Did.Hit = if_else(Hit.Crawler == 1, "Yes", "No"))
+
+summary(Thief.Kill.Crawler.Rolls$Damage.Done)
+
+
+```
