@@ -18,6 +18,7 @@ Convert to percentage: $40\%$
 #| message: false
 #| warning: false
 
+d4 <- seq(1:4)
 d8 <- seq(1:8)
 d20 <- seq(1:20)
 
@@ -46,6 +47,21 @@ Thief.Kill.Crawler.Rolls <-  Thief.Kill.Crawler.Rolls |>
   mutate(Did.Hit = if_else(Hit.Crawler == 1, "Yes", "No"))
 
 summary(Thief.Kill.Crawler.Rolls$Damage.Done)
+
+MageDamageDie <-sample(d4, n, replace = TRUE) 
+MageToHitDie <- sample(d20, n, replace = TRUE)
+
+Mage.Kill.Crawler.Rolls <- data.frame(MageDamageDie, MageToHitDie)
+
+Mage.Kill.Crawler.Rolls <-  Mage.Kill.Crawler.Rolls |> 
+  mutate(Crawler.AC = 12) |> 
+  mutate(Hit.Crawler = if_else(MageToHitDie >= Crawler.AC, 1, 0)) |> 
+  mutate(Damage.Done = MageDamageDie*Hit.Crawler) |> 
+  mutate(Did.Hit = if_else(Hit.Crawler == 1, "Yes", "No"))
+
+summary(Mage.Kill.Crawler.Rolls$Damage.Done)
+
+
 
 
 ```
